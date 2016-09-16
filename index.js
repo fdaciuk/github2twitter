@@ -4,8 +4,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const Twitter = require('twitter')
 const app = express()
-const port = process.env.PORT
-const path = process.env.PATH
+const port = process.env.APP_PORT
+const path = process.env.APP_PATH
 const twitter = new Twitter({
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
