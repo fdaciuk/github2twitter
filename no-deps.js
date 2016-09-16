@@ -1,6 +1,6 @@
 'use strict'
 const pkg = require('./package.json')
-pkg.dependencies = pkg.devDependencies = []
+pkg.devDependencies = []
 
 const write = require('fs').writeFileSync
 
