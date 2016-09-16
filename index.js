@@ -18,11 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.post(path, (req, res, next) => {
   if (req.body.action !== 'opened') {
-    return next('Is no opened issue')
+    return next('It is no opened issue')
   }
 
-  const { html_url, title } = req.body.issue
-  const status = { status: `${title}\n${html_url}` }
+  const { html_url: htmlUrl, title } = req.body.issue
+  const status = { status: `${title}\n${htmlUrl}` }
   twitter.post('statuses/update', status, (err, tweet, response) => {
     if (err) return next(err)
     console.log('Tweet ok!')
@@ -37,7 +37,7 @@ app.get('/tweet', (req, res) => {
 
 app.all((req, res) => {
   console.log(`not on ${path}`)
-  res.send('</3')
+  res.status(500).send('</3')
 })
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}`))
