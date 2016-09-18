@@ -30,6 +30,10 @@ Create a new app on https://apps.twitter.com/, and configure to read and write.
 - `npm run watch:debug`: Run local dev server in debug mode
 - `npm run deploy`: Deploy to [`now`](https://zeit.co/now)
 
+## Notes
+
+It will just tweet on production environment. To force tweet on development environment, edit `index.js`, on line `59`, and pass `'production'` by parameter for `isProduction` function.
+
 ## License
 
 [MIT License](LICENSE)
