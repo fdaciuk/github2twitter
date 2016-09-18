@@ -4,10 +4,12 @@ const crypto = require('crypto')
 const express = require('express')
 const bodyParser = require('body-parser')
 const Twitter = require('twitter')
+
 const app = express()
 const port = process.env.APP_PORT || 8080
 const path = process.env.APP_PATH || '/webhook'
 const secretGitHub = process.env.GITHUB_SECRET
+
 const twitter = new Twitter({
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
@@ -22,8 +24,24 @@ const createSignature = (key, body) => (
     .digest('hex')
 )
 
-const isGitHubSignatureValid = (githubHeader, signature) => (
-  githubHeader === signature
+const isGitHubSignatureValid = (req) => {
+  const signature = createSignature(secretGitHub, req.body)
+  return req.headers['x-hub-signature'] === signature
+}
+
+const tweetIssue = (req, next) => {
+  const { html_url: htmlUrl, title } = req.body.issue
+  const tweet = { status: `${title}\n${htmlUrl}` }
+  twitter.post('statuses/update', tweet, (err, tweet, response) => {
+    if (err) return next(err)
+    console.log('Tweet ok!')
+  })
+  return tweet
+}
+
+const isOpenedIssue = (req) => req.body.action === 'opened'
+const isProduction = (env) => (
+  env === 'production' || process.env.NODE_ENV === 'production'
 )
 
 app.use(bodyParser.json())
@@ -34,23 +52,16 @@ app.get('/', (req, res) => {
 })
 
 app.post(path, (req, res, next) => {
-  const { body } = req
-  const githubHeader = req.headers['x-hub-signature']
-  const isOpenedIssue = req.body.action === 'opened'
-  const signature = createSignature(secretGitHub, body)
-  const isValidSignature = isGitHubSignatureValid(githubHeader, signature)
-
-  if (!isOpenedIssue || !isValidSignature) {
-    return next('It is no opened issue or invalid signature')
+  if (!isOpenedIssue(req) || !isGitHubSignatureValid(req)) {
+    return next('It is not an opened issue or the signature is invalid')
   }
 
-  const { html_url: htmlUrl, title } = req.body.issue
-  const status = { status: `${title}\n${htmlUrl}` }
-  twitter.post('statuses/update', status, (err, tweet, response) => {
-    if (err) return next(err)
-    console.log('Tweet ok!')
-  })
+  if (isProduction()) {
+    const tweet = tweetIssue(req, next)
+    console.log('tweet:', tweet.status)
+  }
 
+  console.log('well done!')
   res.send('<3')
 })
 
