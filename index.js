@@ -4,8 +4,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const Twitter = require('twitter')
 const app = express()
-const port = process.env.APP_PORT
-const path = process.env.APP_PATH
+const port = process.env.APP_PORT || 8080
+const path = process.env.APP_PATH || '/webhook'
 const twitter = new Twitter({
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
@@ -15,6 +15,10 @@ const twitter = new Twitter({
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+app.get('/', (req, res) => {
+  res.send('It works <3')
+})
 
 app.post(path, (req, res, next) => {
   if (req.body.action !== 'opened') {
