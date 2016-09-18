@@ -8,6 +8,8 @@
 
 Choose a repository on GitHub that you want to read issues to post on Twitter. Enter on **Settings** and configure a new webhook.
 
+To test webhook locally and set a URL on GitHub, we recomend you to use [ngrok](https://ngrok.com/)
+
 **Create an app on Twitter:**
 
 Create a new app on https://apps.twitter.com/, and configure to read and write.
