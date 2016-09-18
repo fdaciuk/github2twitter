@@ -9,7 +9,7 @@ gulp.task('lint', (cb) => {
 })
 
 gulp.task('start', (cb) => {
-  const cmd = spawn('npm', ['start'], { stdio: 'inherit' })
+  const cmd = spawn('nodemon', ['index.js'], { stdio: 'inherit' })
   cmd.on('close', (code) => cb(code))
 })
 
