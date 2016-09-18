@@ -4,7 +4,7 @@
     "start": "node index.js",
     "alias": "now alias $(now ls | awk '{print $2}' | sed '5!d' | sed -e 's/https:\\/\\///' | sed -e 's/\\.now\\.sh//') frontendbr",
     "predeploy": "node no-deps.js",
-    "deploy": "now -e APP_PORT=@port -e APP_PATH=@path -e CONSUMER_KEY=@consumer_key -e CONSUMER_SECRET=@consumer_secret -e ACCESS_TOKEN_KEY=@access_token_key -e ACCESS_TOKEN_SECRET=@access_token_secret",
+    "deploy": "now -e APP_PORT=@port -e APP_PATH=@path -e GITHUB_SECRET=@github_secret -e CONSUMER_KEY=@consumer_key -e CONSUMER_SECRET=@consumer_secret -e ACCESS_TOKEN_KEY=@access_token_key -e ACCESS_TOKEN_SECRET=@access_token_secret",
     "postdeploy": "git checkout package.json && npm run alias",
     "lint": "standard --verbose | snazzy",
     "watch": "gulp"
