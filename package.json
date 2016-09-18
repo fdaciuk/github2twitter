@@ -7,7 +7,8 @@
     "deploy": "now -e APP_PORT=@port -e APP_PATH=@path -e GITHUB_SECRET=@github_secret -e CONSUMER_KEY=@consumer_key -e CONSUMER_SECRET=@consumer_secret -e ACCESS_TOKEN_KEY=@access_token_key -e ACCESS_TOKEN_SECRET=@access_token_secret",
     "postdeploy": "git checkout package.json && npm run alias",
     "lint": "standard --verbose | snazzy",
-    "watch": "gulp"
+    "watch": "gulp",
+    "watch:debug": "gulp debug"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

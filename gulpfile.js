@@ -13,6 +13,17 @@ gulp.task('start', (cb) => {
   cmd.on('close', (code) => cb(code))
 })
 
-gulp.task('default', ['lint', 'start'], () => {
-  gulp.watch('index.js', ['lint', 'start'])
+gulp.task('start:debug', (cb) => {
+  const cmd = spawn('nodemon', ['--inspect', '--debug-brk', 'index.js'], { stdio: 'inherit' })
+  cmd.on('close', (code) => cb(code))
+})
+
+const debugTasks = ['lint', 'start:debug']
+gulp.task('debug', debugTasks, () => {
+  gulp.watch('index.js', debugTasks)
+})
+
+const defaultTasks = ['lint', 'start']
+gulp.task('default', defaultTasks, () => {
+  gulp.watch('index.js', defaultTasks)
 })

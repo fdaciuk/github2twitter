@@ -27,6 +27,7 @@ Create a new app on https://apps.twitter.com/, and configure to read and write.
 ## Scripts
 
 - `npm run watch`: Run local dev server (install `nodemon` globally)
+- `npm run watch:debug`: Run local dev server in debug mode
 - `npm run deploy`: Deploy to [`now`](https://zeit.co/now)
 
 ## License
