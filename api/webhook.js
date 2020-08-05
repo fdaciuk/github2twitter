@@ -28,7 +28,7 @@ const tweetIssue = (req) => {
   const { html_url: htmlUrl, title } = req.body.issue
   const tweet = { status: `${title}\n${htmlUrl}` }
   twitter.post('statuses/update', tweet, (err, tweet, response) => {
-    if (err) return console.error(err)
+    if (err) return console.error('Error posting on twitter:', err)
     console.log('Tweet ok!')
   })
   return tweet
@@ -41,7 +41,8 @@ const isProduction = (env) => (
 
 module.exports = (req, res) => {
   if (!isOpenedIssue(req) || !isGitHubSignatureValid(req)) {
-    return console.error('It is not an opened issue or the signature is invalid', JSON.stringify(req.body, null, 2))
+    console.log('error:', JSON.stringify(req.headers, null, 2))
+    throw new Error('It is not an opened issue or the signature is invalid')
   }
 
   if (isProduction()) {
