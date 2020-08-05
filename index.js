@@ -66,8 +66,8 @@ app.post(path, (req, res, next) => {
 })
 
 app.get('/tweet', (req, res) => {
-  console.log('req.body tweet:', req.body)
-  res.send('twitter')
+  console.log('twitter callback url:', req.body)
+  res.send('twitter callback url')
 })
 
 app.all((req, res) => {
