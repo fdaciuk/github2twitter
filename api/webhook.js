@@ -1,5 +1,6 @@
 'use strict'
 
+const crypto = require('crypto')
 const Twitter = require('twitter')
 
 const secretGitHub = process.env.GITHUB_SECRET
