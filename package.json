@@ -1,7 +1,6 @@
 {
   "name": "github2twitter",
   "scripts": {
-    "dev": "npx vercel dev",
     "deploy": "npx vercel",
     "lint": "standard --verbose | snazzy"
   },
