@@ -1,7 +1,8 @@
 {
   "name": "github2twitter",
   "scripts": {
-    "lint": "standard --verbose | snazzy"
+    "lint": "standard --verbose | snazzy",
+    "lint:fix": "standard --fix"
   },
   "devDependencies": {
     "snazzy": "8.0.0",
