@@ -1,6 +1,7 @@
 {
   "name": "github2twitter",
   "scripts": {
+    "start": "node app.js",
     "lint": "standard --verbose | snazzy",
     "lint:fix": "standard --fix"
   },
