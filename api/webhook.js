@@ -21,10 +21,6 @@ const createSignature = (key, body) => (
 
 const isGitHubSignatureValid = (req) => {
   const signature = createSignature(secretGitHub, req.body)
-  console.log('x-hub-signature', req.headers['x-hub-signature'])
-  console.log('manual signature:', signature)
-  console.log('is valid signature?', req.headers['x-hub-signature'] === signature)
-  console.log(typeof req.body)
   return req.headers['x-hub-signature'] === signature
 }
 
