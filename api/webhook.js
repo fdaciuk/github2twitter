@@ -24,7 +24,7 @@ const isGitHubSignatureValid = (req) => {
   console.log('x-hub-signature', req.headers['x-hub-signature'])
   console.log('manual signature:', signature)
   console.log('is valid signature?', req.headers['x-hub-signature'] === signature)
-  cosnole.log(typeof req.body)
+  console.log(typeof req.body)
   return req.headers['x-hub-signature'] === signature
 }
 
