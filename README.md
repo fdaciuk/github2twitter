@@ -14,25 +14,33 @@ To test webhook locally and set a URL on GitHub, we recomend you to use [ngrok](
 
 Create a new app on https://apps.twitter.com/, and configure to read and write.
 
-**Configure some environment variables:**
+**Environment Variables:**
+
+Create a copy of the file `.env.example` called `.env`. Then, just configure some environment variables inside this file:
 
 - `PORT`: Port to run the server. Default is `8080`
-- `APP_PATH`: Path to GitHub send the webhook. Default is `/webhook`
 - `GITHUB_SECRET`: GitHub secret on webhook configuration
 - `CONSUMER_KEY`: Twitter Consumer Key
 - `CONSUMER_SECRET`: Twitter Consumer Secret
 - `ACCESS_TOKEN_KEY`: Twitter Access Token Key
 - `ACCESS_TOKEN_SECRET`: Twitter Access Token Secret
 
+## Default configurations
+
+- `/api/webhook` is the route to configure on GitHub app
+- `/api/tweet` is the route to configure as callback on Twitter app
+
 ## Scripts
 
-- `npm run watch`: Run local dev server (install `nodemon` globally)
-- `npm run watch:debug`: Run local dev server in debug mode
-- `npm run deploy`: Deploy to [`now`](https://zeit.co/now)
+- `yarn dev`: Run local dev server
 
 ## Notes
 
 It will just tweet on production environment. To force tweet on development environment, edit `index.js`, on line `59`, and pass `'production'` by parameter for `isProduction` function.
+
+## Deploy
+
+This repository is ready to run inside Heroku.
 
 ## License
 

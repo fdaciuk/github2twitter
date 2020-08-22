@@ -2,6 +2,7 @@
   "name": "github2twitter",
   "scripts": {
     "start": "node app.js",
+    "dev": "npx nodemon app.js",
     "lint": "standard --verbose | snazzy",
     "lint:fix": "standard --fix"
   },
