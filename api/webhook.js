@@ -41,7 +41,7 @@ const isProduction = (env) => (
 
 module.exports = (req, res) => {
   if (!isOpenedIssue(req) || !isGitHubSignatureValid(req)) {
-    console.log('error:', req.body)
+    console.log('error:', req.body.action)
     throw new Error('It is not an opened issue or the signature is invalid')
   }
 
